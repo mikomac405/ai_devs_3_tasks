@@ -1,0 +1,32 @@
+Hard:
+Jesteś operatorem robota, który przemieszcza się tylko w kierunkach: góra, dół, lewa, prawa.
+
+Robot porusza się po planszy o wymiarach 6x4.
+Punkt na planszy opisywany jest za pomocą struktury (x,y) gdzie x opisuje ruch w prawo i lewo a y w górę i dół.
+
+Czyli komenda UP zmniejsza liczbę y a komenda DOWN ją zmniejsza, komenda LEFT zmniejsza liczby x a komenda RIGHT ją zwiększa.
+
+Robot znajduje się w punkcie (0, 3) a musi dojść do punktu (5,3).
+Na jego drodze są przeszkody, czyli pola przez, które nie może przejść, są to pola: (1,0), (1,2), (1,3), (3,1) oraz (3,2). Poza tym robot nie może wyjść poza ten obszar.
+
+Robot rozumie tylko program, który generuje dla niego poniższą strukturę.
+<RESULT>
+{
+ "steps": "UP, RIGHT, DOWN, LEFT"
+}
+</RESULT>
+Wygeneruj poprawne instrukcje poruszania robota z punktu (0,3) do (5,3), w której omija on wszystkie przeszkody.
+
+Jeżeli trafisz na przeszkodę, zacznij od początku.
+
+Easy:
+Jesteś operatorem robota, który przemieszcza się tylko w kierunkach: góra, dół, lewa, prawa.
+
+Robot rozumie tylko program, który generuje dla niego poniższą strukturę.
+<RESULT>
+{
+ "steps": "UP, RIGHT, DOWN, LEFT"
+}
+</RESULT>
+
+Wygeneruj poprawne instrukcje poruszania robota: góra, góra, prawo, prawo, dół, dół, prawo, prawo, prawo.

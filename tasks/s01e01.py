@@ -5,23 +5,23 @@ from openai import OpenAI
 
 load_dotenv()
 
-question_regex = r'<p id="human-question">Question:<br \/?>([^<]+)<\/p>'
-url = "https://xyz.ag3nts.org"
-data = "username=tester&password=574e112a&answer={}"
-headers = {"Content-Type": "application/x-www-form-urlencoded"}
+question_regex: str = r'<p id="human-question">Question:<br \/?>([^<]+)<\/p>'
+url: str = "https://xyz.ag3nts.org"
+data: str = "username=tester&password=574e112a&answer={}"
+headers: dict = {"Content-Type": "application/x-www-form-urlencoded"}
 
-def extract_question(html):
+def extract_question(html: str) -> str:
     match = re.search(question_regex, html, re.IGNORECASE)
     return match.group(1).strip() if match else None
 
 
-site_content = requests.get(url).text
-extracted_question = extract_question(site_content)
+site_content: requests.Response = requests.get(url).text
+extracted_question: str = extract_question(site_content)
 print(f"Question from {url}:", extracted_question)
 
-client = OpenAI()
+client: OpenAI = OpenAI()
 
-system_prompt = """
+system_prompt: str = """
 Jesteś asystentem odpowiadającym wyłącznie wartościami numerycznymi. Twoim zadaniem jest podanie TYLKO wartości liczbowej jako odpowiedzi na pytania.
 
 Zasady:
@@ -55,5 +55,5 @@ response_llm = client.responses.create(
 )
 print("Response from LLM:", response_llm.output_text)
 print(data.format(response_llm.output_text))
-response = requests.post(url, data=data.format(response_llm.output_text), headers=headers)
+response: requests.Response = requests.post(url, data=data.format(response_llm.output_text), headers=headers)
 print(f"Response from {url}:", response.text)

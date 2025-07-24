@@ -5,23 +5,23 @@ from openai import OpenAI
 
 load_dotenv()
 
-url = 'https://xyz.ag3nts.org/verify'
+url: str = 'https://xyz.ag3nts.org/verify'
 
-headers = {
+headers: dict = {
     'accept': 'application/json',
     'Content-Type': 'application/json',
 }
 
-json_data = {
+json_data: dict = {
     'text': 'READY',
     'msgID': 0,
 }
 
-response = requests.post(url, headers=headers, json=json_data)
-response_data = response.json()
+response: requests.Response = requests.post(url, headers=headers, json=json_data)
+response_data: dict = response.json()
 print(f"Response from {url}:", response_data)
 
-system_prompt = """
+system_prompt: str = """
 Jesteś asystentem odpowiadającym wyłącznie na zadane pytanie po angielsku. Twoim zadaniem jest podanie TYLKO odpowiedzi w jezyku angielskim na pytania.
 
 Zasady:
@@ -47,7 +47,7 @@ Pytanie: What city is the capital of Poland?
 Odpowiedź: Kraków
 """
 
-client = OpenAI()
+client: OpenAI = OpenAI()
 
 response_llm = client.responses.create(
     model="o4-mini",
@@ -59,11 +59,11 @@ response_llm = client.responses.create(
 
 print("Response from LLM:", response_llm.output_text)
 
-json_data = {
+json_data: dict = {
     'text':  response_llm.output_text,
     'msgID': response_data['msgID'],
 }
 
-response = requests.post(url, headers=headers, json=json_data)
-response_data = response.json()
+response: requests.Response = requests.post(url, headers=headers, json=json_data)
+response_data: dict = response.json()
 print(f"Response from {url}:", response_data)
